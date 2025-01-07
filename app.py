@@ -3,40 +3,49 @@ import pandas as pd
 import os
 
 
-class QuestionDatabaseApp:
-    def __init__(self, db_file="sample_db.csv", topics_file="sample_topics.csv"):
+class ProblemDatabaseApp:
+    def __init__(
+        self, db_file="sample_db.csv", categories_file="sample_categories.csv"
+    ):
         self.db_file = db_file
-        self.topics_file = topics_file
+        self.categories_file = categories_file
         self.df = self.load_database()
-        self.topics, self.subtopics = self.load_topics_and_subtopics()
+        self.categories, self.subcategories = self.load_categories_and_subcategories()
 
     def load_database(self):
         """
-        Load the question database from the CSV file or initialize a new DataFrame if it doesn't exist.
+        Load the problem database from the CSV file or initialize a new DataFrame if it doesn't exist.
         """
         if os.path.exists(self.db_file):
             return pd.read_csv(self.db_file)
         else:
-            return pd.DataFrame(columns=[
-                'Custom_Question_ID', 'Topic', 'Subtopic', 'Year',
-                'Focus_Topic', 'Focus_Subtopic'
-            ])
+            return pd.DataFrame(
+                columns=[
+                    "Custom_Problem_ID",
+                    "Category",
+                    "Subcategory",
+                    "Year",
+                    "Focus_Category",
+                    "Focus_Subcategory",
+                ]
+            )
 
-    def load_topics_and_subtopics(self):
+    def load_categories_and_subcategories(self):
         """
-        Load topics and subtopics from the topics.csv file.
+        Load categories and subcategories from the categories.csv file.
         """
-        if os.path.exists(self.topics_file):
-            df_topics = pd.read_csv(self.topics_file)
-            topics = df_topics['Topic'].unique().tolist()
-            subtopics = {}
+        if os.path.exists(self.categories_file):
+            df_categories = pd.read_csv(self.categories_file)
+            categories = df_categories["Category"].unique().tolist()
+            subcategories = {}
 
-            # Populate the subtopics dictionary
-            for topic in topics:
-                subtopics[topic] = df_topics[df_topics['Topic']
-                                             == topic]['Subtopic'].tolist()
+            # Populate the subcategories dictionary
+            for category in categories:
+                subcategories[category] = df_categories[
+                    df_categories["Category"] == category
+                ]["Subcategory"].tolist()
 
-            return topics, subtopics
+            return categories, subcategories
         else:
             return [], {}
 
@@ -48,234 +57,302 @@ class QuestionDatabaseApp:
 
     def display_sidebar(self):
         """
-        Display the sidebar for adding new questions and custom topics/subtopics.
+        Display the sidebar for adding new problems and custom categories/subcategories.
         """
-        st.sidebar.header('Add/Edit Question')
+        st.sidebar.header("Add/Edit Problem")
 
-        # Add new question (this comes first)
-        st.sidebar.subheader("Add New Question")
-        question_id = st.sidebar.text_input('Custom Question ID')
+        # Add new problem (this comes first)
+        st.sidebar.subheader("Add New Problem")
+        problem_id = st.sidebar.text_input("Custom Problem ID")
         year = st.sidebar.number_input(
-            'Year', min_value=1900, max_value=2100, value=2025)
+            "Year", min_value=1900, max_value=2100, value=2025
+        )
 
-        # Ensure a blank option is available for topics and subtopics
-        topic = st.sidebar.multiselect('Select Topic(s)', [''] + self.topics)
-        subtopic_options = [
-            sub for t in topic if t in self.subtopics for sub in self.subtopics[t]]
-        subtopic = st.sidebar.multiselect(
-            'Select Subtopic(s)', [''] + list(set(subtopic_options)))
+        # Ensure a blank option is available for categories and subcategories
+        category = st.sidebar.multiselect("Select Category(s)", [""] + self.categories)
+        subcategory_options = [
+            sub
+            for t in category
+            if t in self.subcategories
+            for sub in self.subcategories[t]
+        ]
+        subcategory = st.sidebar.multiselect(
+            "Select Subcategory(s)", [""] + list(set(subcategory_options))
+        )
 
-        focus_topic = st.sidebar.multiselect(
-            'Focus Topic(s)', [''] + self.topics)
-        focus_subtopic_options = [
-            sub for t in focus_topic if t in self.subtopics for sub in self.subtopics[t]]
-        focus_subtopic = st.sidebar.multiselect(
-            'Focus Subtopic(s)', [''] + list(set(focus_subtopic_options)))
+        focus_category = st.sidebar.multiselect(
+            "Focus Category(s)", [""] + self.categories
+        )
+        focus_subcategory_options = [
+            sub
+            for t in focus_category
+            if t in self.subcategories
+            for sub in self.subcategories[t]
+        ]
+        focus_subcategory = st.sidebar.multiselect(
+            "Focus Subcategory(s)", [""] + list(set(focus_subcategory_options))
+        )
 
-        if st.sidebar.button('Add Question'):
-            self.add_question(question_id, topic, subtopic,
-                              year, focus_topic, focus_subtopic)
-
-        # Manage Custom Topic and Subtopic (this comes last)
-        st.sidebar.subheader("Manage Custom Topics and Subtopics")
-
-        # Add custom topic
-        add_custom_topic = st.sidebar.text_input("Add Custom Topic")
-        add_custom_subtopic = st.sidebar.text_input(
-            "Add Subtopic for Custom Topic")
-
-        # Edit existing custom topics
-        custom_topic_to_edit = st.sidebar.selectbox(
-            # Shows all topics including custom
-            "Edit Custom Topic", [''] + self.topics)
-        if custom_topic_to_edit:
-            edited_topic_name = st.sidebar.text_input(
-                "Edit Topic Name", value=custom_topic_to_edit)
-            edited_subtopics = st.sidebar.text_area(
-                "Edit Subtopics (comma-separated)",
-                value=', '.join(self.subtopics.get(custom_topic_to_edit, []))
+        if st.sidebar.button("Add Problem"):
+            self.add_problem(
+                problem_id,
+                category,
+                subcategory,
+                year,
+                focus_category,
+                focus_subcategory,
             )
 
-            if st.sidebar.button("Save Topic Changes"):
-                # Update the custom topic and subtopics
-                self.update_custom_topic(
-                    custom_topic_to_edit, edited_topic_name, edited_subtopics)
+        # Manage Custom Category and Subcategory (this comes last)
+        st.sidebar.subheader("Manage Custom Categories and Subcategories")
 
-        # Add the custom topic if new
-        if add_custom_topic:
-            self.add_custom_topic(add_custom_topic, add_custom_subtopic)
+        # Add custom category
+        add_custom_category = st.sidebar.text_input("Add Custom Category")
+        add_custom_subcategory = st.sidebar.text_input(
+            "Add Subcategory for Custom Category"
+        )
 
-    def add_custom_topic(self, custom_topic, custom_subtopic):
+        # Edit existing custom categories
+        custom_category_to_edit = st.sidebar.selectbox(
+            # Shows all categories including custom
+            "Edit Custom Category",
+            [""] + self.categories,
+        )
+        if custom_category_to_edit:
+            edited_category_name = st.sidebar.text_input(
+                "Edit Category Name", value=custom_category_to_edit
+            )
+            edited_subcategories = st.sidebar.text_area(
+                "Edit Subcategories (comma-separated)",
+                value=", ".join(self.subcategories.get(custom_category_to_edit, [])),
+            )
+
+            if st.sidebar.button("Save Category Changes"):
+                # Update the custom category and subcategories
+                self.update_custom_category(
+                    custom_category_to_edit, edited_category_name, edited_subcategories
+                )
+
+        # Add the custom category if new
+        if add_custom_category:
+            self.add_custom_category(add_custom_category, add_custom_subcategory)
+
+    def add_custom_category(self, custom_category, custom_subcategory):
         """
-        Add a new custom topic and its subtopic if provided.
+        Add a new custom category and its subcategory if provided.
         """
-        if custom_topic not in self.topics:
-            self.topics.append(custom_topic)
-            self.subtopics[custom_topic] = [
-                custom_subtopic] if custom_subtopic else []
-            st.sidebar.success("Custom topic added successfully!")
-            self.save_topics()  # Save topics to CSV after modification
+        if custom_category not in self.categories:
+            self.categories.append(custom_category)
+            self.subcategories[custom_category] = (
+                [custom_subcategory] if custom_subcategory else []
+            )
+            st.sidebar.success("Custom category added successfully!")
+            self.save_categories()  # Save categories to CSV after modification
         else:
-            st.sidebar.warning("Topic already exists!")
+            st.sidebar.warning("Category already exists!")
 
-    def update_custom_topic(self, old_topic, new_topic, new_subtopics):
+    def update_custom_category(self, old_category, new_category, new_subcategories):
         """
-        Update an existing custom topic and its subtopics.
+        Update an existing custom category and its subcategories.
         """
-        new_subtopics_list = [sub.strip()
-                              for sub in new_subtopics.split(',') if sub.strip()]
+        new_subcategories_list = [
+            sub.strip() for sub in new_subcategories.split(",") if sub.strip()
+        ]
 
-        # Update the topic name
-        if old_topic in self.topics:
-            self.topics = [new_topic if t ==
-                           old_topic else t for t in self.topics]
-            self.subtopics[new_topic] = new_subtopics_list
+        # Update the category name
+        if old_category in self.categories:
+            self.categories = [
+                new_category if t == old_category else t for t in self.categories
+            ]
+            self.subcategories[new_category] = new_subcategories_list
 
-            # Remove old topic
-            if old_topic != new_topic:
-                del self.subtopics[old_topic]
+            # Remove old category
+            if old_category != new_category:
+                del self.subcategories[old_category]
 
-            st.sidebar.success("Custom topic updated successfully!")
-            self.save_topics()  # Save topics to CSV after modification
+            st.sidebar.success("Custom category updated successfully!")
+            self.save_categories()  # Save categories to CSV after modification
         else:
-            st.sidebar.error("Topic does not exist!")
+            st.sidebar.error("Category does not exist!")
 
-    def save_topics(self):
+    def save_categories(self):
         """
-        Save the current topics and subtopics to the topics.csv file.
+        Save the current categories and subcategories to the categories.csv file.
         """
         rows = []
-        for topic, subs in self.subtopics.items():
+        for category, subs in self.subcategories.items():
             for sub in subs:
-                rows.append([topic, sub])
-        df_topics = pd.DataFrame(rows, columns=["Topic", "Subtopic"])
-        df_topics.to_csv(self.topics_file, index=False)
+                rows.append([category, sub])
+        df_categories = pd.DataFrame(rows, columns=["Category", "Subcategory"])
+        df_categories.to_csv(self.categories_file, index=False)
 
-    def add_question(self, question_id, topic, subtopic, year, focus_topic, focus_subtopic):
+    def add_problem(
+        self, problem_id, category, subcategory, year, focus_category, focus_subcategory
+    ):
         """
-        Add a new question to the database.
+        Add a new problem to the database.
         """
-        if question_id:
+        if problem_id:
             new_data = {
-                'Custom_Question_ID': question_id,
-                'Topic': ', '.join(topic),
-                'Subtopic': ', '.join(subtopic) if subtopic else '',
-                'Year': year,
-                'Focus_Topic': ', '.join(focus_topic),
-                'Focus_Subtopic': ', '.join(focus_subtopic)
+                "Custom_Problem_ID": problem_id,
+                "Category": ", ".join(category),
+                "Subcategory": ", ".join(subcategory) if subcategory else "",
+                "Year": year,
+                "Focus_Category": ", ".join(focus_category),
+                "Focus_Subcategory": ", ".join(focus_subcategory),
             }
             new_df = pd.DataFrame([new_data])
             self.df = pd.concat([self.df, new_df], ignore_index=True)
             self.save_database()
-            st.sidebar.success("Question added successfully!")
+            st.sidebar.success("Problem added successfully!")
         else:
-            st.sidebar.error("Question ID cannot be empty!")
+            st.sidebar.error("Problem ID cannot be empty!")
 
-    def display_questions(self):
+    def display_problems(self):
         """
-        Display the database and allow editing or deleting questions.
+        Display the database and allow editing or deleting problems.
         """
-        st.header('Question Database')
+        st.header("Problem Database")
         if len(self.df) > 0:
             st.write(self.df)
-            self.edit_or_delete_question()
+            self.edit_or_delete_problem()
         else:
-            st.write("No questions available.")
+            st.write("No problems available.")
 
-    def edit_or_delete_question(self):
+    def edit_or_delete_problem(self):
         """
-        Allow editing or deleting a selected question.
+        Allow editing or deleting a selected problem.
         """
-        selected_question_id = st.selectbox(
-            "Select a question to edit or delete", self.df['Custom_Question_ID'].tolist(
-            )
+        selected_problem_id = st.selectbox(
+            "Select a problem to edit or delete", self.df["Custom_Problem_ID"].tolist()
         )
-        selected_question = self.df[self.df['Custom_Question_ID']
-                                    == selected_question_id]
+        selected_problem = self.df[self.df["Custom_Problem_ID"] == selected_problem_id]
 
-        if selected_question.empty:
-            st.warning("No question selected.")
+        if selected_problem.empty:
+            st.warning("No problem selected.")
             return
 
-        st.subheader("Edit Question Details")
-        current_topic, current_subtopics, current_focus_topic, current_focus_subtopic = self.get_current_values(
-            selected_question
+        st.subheader("Edit Problem Details")
+        (
+            current_category,
+            current_subcategories,
+            current_focus_category,
+            current_focus_subcategory,
+        ) = self.get_current_values(selected_problem)
+
+        edit_categories = st.multiselect(
+            "Edit Category(s)", [""] + self.categories, default=current_category
+        )
+        edit_subcategories_options = [
+            sub
+            for category in edit_categories
+            if category in self.subcategories
+            for sub in self.subcategories.get(category, [])
+        ]
+        edit_subcategories = st.multiselect(
+            "Edit Subcategory(s)",
+            [""] + list(set(edit_subcategories_options + current_subcategories)),
+            default=current_subcategories,
         )
 
-        edit_topics = st.multiselect(
-            "Edit Topic(s)", [''] + self.topics, default=current_topic)
-        edit_subtopics_options = [
-            sub for topic in edit_topics if topic in self.subtopics for sub in self.subtopics.get(topic, [])
-        ]
-        edit_subtopics = st.multiselect(
-            "Edit Subtopic(s)", [
-                ''] + list(set(edit_subtopics_options + current_subtopics)),
-            default=current_subtopics
+        edit_year = st.number_input(
+            "Edit Year", value=int(selected_problem["Year"].values[0])
         )
 
-        edit_year = st.number_input("Edit Year", value=int(
-            selected_question['Year'].values[0]))
-
-        edit_focus_topics = st.multiselect(
-            "Edit Focus Topic(s)", [''] + self.topics, default=current_focus_topic)
-        edit_focus_subtopics_options = [
-            sub for topic in edit_focus_topics if topic in self.subtopics for sub in self.subtopics.get(topic, [])
+        edit_focus_categories = st.multiselect(
+            "Edit Focus Category(s)",
+            [""] + self.categories,
+            default=current_focus_category,
+        )
+        edit_focus_subcategories_options = [
+            sub
+            for category in edit_focus_categories
+            if category in self.subcategories
+            for sub in self.subcategories.get(category, [])
         ]
-        edit_focus_subtopics = st.multiselect(
-            "Edit Focus Subtopic(s)", [
-                ''] + list(set(edit_focus_subtopics_options + current_focus_subtopic)),
-            default=current_focus_subtopic
+        edit_focus_subcategories = st.multiselect(
+            "Edit Focus Subcategory(s)",
+            [""]
+            + list(set(edit_focus_subcategories_options + current_focus_subcategory)),
+            default=current_focus_subcategory,
         )
 
         if st.button("Save Changes"):
-            self.save_changes(selected_question_id, edit_topics, edit_subtopics,
-                              edit_year, edit_focus_topics, edit_focus_subtopics)
+            self.save_changes(
+                selected_problem_id,
+                edit_categories,
+                edit_subcategories,
+                edit_year,
+                edit_focus_categories,
+                edit_focus_subcategories,
+            )
 
-        if st.button("Delete Question"):
-            self.delete_question(selected_question_id)
+        if st.button("Delete Problem"):
+            self.delete_problem(selected_problem_id)
 
-    def get_current_values(self, question_row):
+    def get_current_values(self, problem_row):
         """
         Helper function to extract current values from the DataFrame row.
         This ensures that missing values are handled properly by converting them to empty strings.
         """
-        topic = str(question_row['Topic'].values[0]) if pd.notna(
-            question_row['Topic'].values[0]) else ''
-        subtopic = str(question_row['Subtopic'].values[0]) if pd.notna(
-            question_row['Subtopic'].values[0]) else ''
-        focus_topic = str(question_row['Focus_Topic'].values[0]) if pd.notna(
-            question_row['Focus_Topic'].values[0]) else ''
-        focus_subtopic = str(question_row['Focus_Subtopic'].values[0]) if pd.notna(
-            question_row['Focus_Subtopic'].values[0]) else ''
+        category = (
+            str(problem_row["Category"].values[0])
+            if pd.notna(problem_row["Category"].values[0])
+            else ""
+        )
+        subcategory = (
+            str(problem_row["Subcategory"].values[0])
+            if pd.notna(problem_row["Subcategory"].values[0])
+            else ""
+        )
+        focus_category = (
+            str(problem_row["Focus_Category"].values[0])
+            if pd.notna(problem_row["Focus_Category"].values[0])
+            else ""
+        )
+        focus_subcategory = (
+            str(problem_row["Focus_Subcategory"].values[0])
+            if pd.notna(problem_row["Focus_Subcategory"].values[0])
+            else ""
+        )
 
         # Now split safely, avoiding the issue of NaN
-        topic = topic.split(', ') if topic else []
-        subtopic = subtopic.split(', ') if subtopic else []
-        focus_topic = focus_topic.split(', ') if focus_topic else []
-        focus_subtopic = focus_subtopic.split(', ') if focus_subtopic else []
+        category = category.split(", ") if category else []
+        subcategory = subcategory.split(", ") if subcategory else []
+        focus_category = focus_category.split(", ") if focus_category else []
+        focus_subcategory = focus_subcategory.split(", ") if focus_subcategory else []
 
-        return topic, subtopic, focus_topic, focus_subtopic
+        return category, subcategory, focus_category, focus_subcategory
 
-    def save_changes(self, question_id, topic, subtopic, year, focus_topic, focus_subtopic):
+    def save_changes(
+        self, problem_id, category, subcategory, year, focus_category, focus_subcategory
+    ):
         """
-        Save the changes made to an existing question.
+        Save the changes made to an existing problem.
         """
-        self.df.loc[self.df['Custom_Question_ID'] == question_id, [
-            'Topic', 'Subtopic', 'Year', 'Focus_Topic', 'Focus_Subtopic']] = [
-            ', '.join(topic), ', '.join(subtopic), year, ', '.join(focus_topic), ', '.join(focus_subtopic)]
+        self.df.loc[
+            self.df["Custom_Problem_ID"] == problem_id,
+            ["Category", "Subcategory", "Year", "Focus_Category", "Focus_Subcategory"],
+        ] = [
+            ", ".join(category),
+            ", ".join(subcategory),
+            year,
+            ", ".join(focus_category),
+            ", ".join(focus_subcategory),
+        ]
         self.save_database()
         st.success("Changes saved successfully!")
 
-    def delete_question(self, question_id):
+    def delete_problem(self, problem_id):
         """
-        Delete the selected question from the database.
+        Delete the selected problem from the database.
         """
-        self.df = self.df[self.df['Custom_Question_ID'] != question_id]
+        self.df = self.df[self.df["Custom_Problem_ID"] != problem_id]
         self.save_database()
-        st.success("Question deleted successfully!")
+        st.success("Problem deleted successfully!")
 
 
 if __name__ == "__main__":
-    app = QuestionDatabaseApp()
+    app = ProblemDatabaseApp()
     app.display_sidebar()
-    app.display_questions()
+    app.display_problems()
