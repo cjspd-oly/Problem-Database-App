@@ -1,10 +1,10 @@
-# Question Database App  📚
+# Problem Database App  📚
 
-A simple, intuitive app for managing **custom questions**, **topics**, and **subtopics**. Built with **Streamlit** and **Pandas**, this app allows you to easily add, edit, and delete questions while tracking topics and subtopics in a **CSV-based database**.
+A simple, intuitive app for managing **custom problems**, **categories**, and **subcategories**. Built with **Streamlit** and **Pandas**, this app allows you to easily add, edit, and delete questions while tracking categories and subcategories in a **CSV-based database**.
 
 ## ✨ Features
-- **Manage Questions**: Add, edit, and delete questions with customizable topics and subtopics.
-- **Custom Topics**: Add and edit custom topics and subtopics.
+- **Manage Problems**: Add, edit, and delete questions with customizable topics and subtopics.
+- **Custom Categories**: Add and edit custom categories and subcategories.
 - **Streamlit Interface**: User-friendly interface for seamless interaction.
 - **CSV Storage**: Data stored in `sample_db.csv` and `sample_topics.csv`.
 
@@ -12,7 +12,7 @@ A simple, intuitive app for managing **custom questions**, **topics**, and **sub
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/<username>/<question-database-app>.git
+   git clone https://github.com/<username>/<problem-database-app>.git
    cd question-database-app
    ```
 
@@ -28,21 +28,21 @@ A simple, intuitive app for managing **custom questions**, **topics**, and **sub
 
 ## 🖥️ How It Works
 
-- **Sidebar**: Add or edit questions, manage topics, and subtopics.
+- **Sidebar**: Add or edit problems, manage categories, and subcategories.
 - **Main Area**: View and interact with your question database.
   
-**Custom Topics**: Add, edit, or remove topics and subtopics. These are saved in `sample_topics.csv` for easy management.
+**Custom Categories**: Add, edit, or remove topics and subtopics. These are saved in `sample_categories.csv` for easy management.
 
 ## 🗂️ File Structure
 
 - **`app.py`**: Core app functionality.
-- **`sample_db.csv`**: Stores questions.
-- **`sample_topics.csv`**: Stores topics and subtopics.
+- **`sample_db.csv`**: Stores problems.
+- **`sample_categories.csv`**: Stores categories and subcategories.
 
-## 🔄 Update Topics & Questions
+## 🔄 Update Categories & Problems
 
-- Add new topics and subtopics directly from the sidebar.  
-- Edit and save questions in the main section.
+- Add new categories and subcategories directly from the sidebar.  
+- Edit and save problems in the main section.
 
 ## 📝 Contribution
 
