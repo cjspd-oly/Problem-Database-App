@@ -353,6 +353,6 @@ class ProblemDatabaseApp:
 
 
 if __name__ == "__main__":
-    app = ProblemDatabaseApp()
+    app = ProblemDatabaseApp(db_file="db/incho_db.csv", categories_file="categories/incho_categories.csv")
     app.display_sidebar()
     app.display_problems()
