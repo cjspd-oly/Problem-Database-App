@@ -1,10 +1,31 @@
 Custom_Problem_ID,Category,Subcategory,Year,Focus_Category,Focus_Subcategory
-2008_P01,"Chemical bonding, Periodic trends","Electron affinity, Molecular orbital theory",2008,"Chemical bonding, Periodic trends",
-2008_P02,"Organic Chemistry, Organic Chemistry (Reactivity)","Alkenes, Introduction, Stereochemistry",2008,,
-2008_P03,Organic Chemistry (Reactivity),Aromatic Compounds,2008,,
-2008_P04,"Chemical calculations, Chemical kinetics, Physical chemistry","Thermodynamics, Reaction mechanisms, Rate law",2008,Chemical kinetics,
-2008_P05,Physical chemistry (Equilibrium),Phase,2008,Physical chemistry (Equilibrium),Phase
+2008_P01,"Chemical bonding, Spectroscopy","Molecular orbital theory, X-Ray",2008,Chemical bonding,Molecular orbital theory
+2008_P02,"Organic Chemistry, Organic Chemistry (Reactivity)","Introduction, Stereochemistry",2008,Organic Chemistry (Reactivity),
+2008_P03,Organic Chemistry (Reactivity),Aromatic Compounds,2008,Organic Chemistry (Reactivity),
+2008_P04,"Chemical calculations, Chemical kinetics, Physical chemistry, Physical chemistry (Equilibrium)","Thermodynamics, Reaction mechanisms, Rate law, Gas phase",2008,"Chemical kinetics, Physical chemistry (Equilibrium)",
+2008_P05,Physical chemistry (Equilibrium),"Phase, Solubility",2008,Physical chemistry (Equilibrium),"Phase, Solubility"
 2008_P06,Inorganic Chemistry (P-Block),Group 15,2008,Inorganic Chemistry (P-Block),Group 15
 2008_P07,Inorganic Chemistry,Coordination chemistry including stereochemistry,2008,Inorganic Chemistry,Coordination chemistry including stereochemistry
 2008_P08,Physical chemistry,Electrochemistry,2008,Physical chemistry,Electrochemistry
-2008_P09,Biochemistry,Nitrogen-containing Compounds of Biological Importance,2008,,
+2008_P09,"Biochemistry, Polymers","Nitrogen-containing Compounds of Biological Importance, Synthetic",2008,"Polymers, Biochemistry","Nitrogen-containing Compounds of Biological Importance, Synthetic"
+2009_P01,The Atom,Hydrogen Atom,2009,The Atom,Hydrogen Atom
+2009_P02,Organic Chemistry (Reactivity),Amines,2009,Organic Chemistry (Reactivity),Amines
+2009_P03,Inorganic Chemistry (P-Block),Group 16,2009,Inorganic Chemistry (P-Block),Group 16
+2009_P04,"Organic Chemistry, Organic Chemistry (Reactivity), Spectroscopy","Stereochemistry, Mass spectrometry",2009,"Organic Chemistry, Organic Chemistry (Reactivity), Spectroscopy","Stereochemistry, Mass spectrometry"
+2009_P05,"Chemical kinetics, The Atom","Radioactivity, Rate law, Reaction mechanisms",2009,"The Atom, Chemical kinetics","Rate law, Radioactivity"
+2009_P06,"Physical chemistry, Physical chemistry (Equilibrium)","Phase, Solubility",2009,"Physical chemistry (Equilibrium), Physical chemistry","Gases, Phase, Solubility"
+2009_P07,Physical chemistry (Equilibrium),Acid-base,2009,Physical chemistry (Equilibrium),Acid-base
+2010_P01,"Organic Chemistry (Reactivity), Chemical kinetics","Reaction mechanisms, Aldehydes",2010,"Organic Chemistry (Reactivity), Chemical kinetics","Aldehydes, Reaction mechanisms"
+2010_P02,Inorganic Chemistry,Coordination chemistry including stereochemistry,2010,Inorganic Chemistry,Coordination chemistry including stereochemistry
+2010_P03,"Organic Chemistry (Reactivity), Organic Chemistry","Benzene, Stereochemistry",2010,Organic Chemistry (Reactivity),Benzene
+2010_P04,Inorganic Chemistry (S-Block),Groups 1 and 2,2010,Inorganic Chemistry (S-Block),Groups 1 and 2
+2010_P05,"Organic Chemistry (Reactivity), Organic Chemistry","Stereochemistry, Carboxylic Acids and their derivatives",2010,Organic Chemistry (Reactivity),Carboxylic Acids and their derivatives
+2010_P05,"Organic Chemistry (Reactivity), Organic Chemistry, Spectroscopy","Carboxylic Acids and their derivatives, Stereochemistry, Infrared",2010,Organic Chemistry (Reactivity),Carboxylic Acids and their derivatives
+2010_P06,Physical chemistry,"Thermodynamics, Gases",2010,Physical chemistry,"Thermodynamics, Gases"
+2010_P07,"Organic Chemistry (Reactivity), Analytical chemistry","Titrations, Carboxylic Acids and their derivatives",2010,"Organic Chemistry (Reactivity), Analytical chemistry","Carboxylic Acids and their derivatives, Titrations"
+2011_P01,Physical chemistry,Electrochemistry,2011,Physical chemistry,Electrochemistry
+2011_P02,Inorganic Chemistry (P-Block),Group 13,2011,Inorganic Chemistry (P-Block),Group 13
+2011_P03,Physical chemistry,Thermodynamics,2011,Physical chemistry,Thermodynamics
+2011_P04,"Inorganic Chemistry (P-Block), Organic Chemistry (Reactivity), Spectroscopy","Heterocyclic, Group 16, Infrared",2011,"Organic Chemistry (Reactivity), Inorganic Chemistry (P-Block)","Group 16, Heterocyclic"
+2011_P05,"Chemical bonding, Inorganic Chemistry","VSEPR, Coordination chemistry including stereochemistry",2011,"Chemical bonding, Inorganic Chemistry","VSEPR, Coordination chemistry including stereochemistry"
+2011_P05,Organic Chemistry (Reactivity),,2011,Organic Chemistry (Reactivity),
