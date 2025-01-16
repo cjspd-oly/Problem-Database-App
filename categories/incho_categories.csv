@@ -21,6 +21,8 @@ Periodic trends,Ion size
 Periodic trends,Highest oxidation number
 Inorganic Chemistry,Introduction
 Inorganic Chemistry,Hydrogen
+Inorganic Chemistry,Coordination chemistry including stereochemistry
+Inorganic Chemistry,Selected industrial processes
 Inorganic Chemistry (S-Block),Groups 1 and 2
 Inorganic Chemistry (P-Block),Group 13
 Inorganic Chemistry (P-Block),Group 14
@@ -30,10 +32,9 @@ Inorganic Chemistry (P-Block),Group 17 (Halogens)
 Inorganic Chemistry (P-Block),Group 18
 Inorganic Chemistry (D-Block),Transition elements
 Inorganic Chemistry (F-Block),Lanthanides and actinides
-Inorganic Chemistry,Coordination chemistry including stereochemistry
-Inorganic Chemistry,Selected industrial processes
 Physical chemistry,Gases
 Physical chemistry,Thermodynamics
+Physical chemistry,Electrochemistry
 Physical chemistry (Equilibrium),Equilibrium
 Physical chemistry (Equilibrium),Acid-base
 Physical chemistry (Equilibrium),Gas phase
@@ -41,7 +42,6 @@ Physical chemistry (Equilibrium),Solubility
 Physical chemistry (Equilibrium),Complexometric
 Physical chemistry (Equilibrium),Phase
 Physical chemistry (Equilibrium),Multiple
-Physical chemistry,Electrochemistry
 Chemical kinetics,Introduction
 Chemical kinetics,Rate law
 Chemical kinetics,Reaction mechanisms
@@ -63,6 +63,7 @@ Organic Chemistry (Reactivity),Ketones
 Organic Chemistry (Reactivity),Carboxylic Acids and their derivatives
 Organic Chemistry (Reactivity),Amines
 Organic Chemistry (Reactivity),Aromatic Compounds
+Organic Chemistry (Reactivity),Heterocyclic
 Polymers,Synthetic
 Polymers,Natural
 Biochemistry,Carbohydrates
