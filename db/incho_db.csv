@@ -29,3 +29,15 @@ Custom_Problem_ID,Category,Subcategory,Year,Focus_Category,Focus_Subcategory
 2011_P04,"Inorganic Chemistry (P-Block), Organic Chemistry (Reactivity), Spectroscopy","Heterocyclic, Group 16, Infrared",2011,"Organic Chemistry (Reactivity), Inorganic Chemistry (P-Block)","Group 16, Heterocyclic"
 2011_P05,"Chemical bonding, Inorganic Chemistry","VSEPR, Coordination chemistry including stereochemistry",2011,"Chemical bonding, Inorganic Chemistry","VSEPR, Coordination chemistry including stereochemistry"
 2011_P05,Organic Chemistry (Reactivity),,2011,Organic Chemistry (Reactivity),
+2012_P01,Organic Chemistry (Reactivity),"Heterocyclic, Aromatic Compounds, Amines",2012,Organic Chemistry (Reactivity),"Aromatic Compounds, Amines, Heterocyclic"
+2012_P02,Analytical chemistry,Titrations,2012,Analytical chemistry,Titrations
+2012_P03,,,2012,,
+2012_P04,Organic Chemistry (Reactivity),,2012,Organic Chemistry (Reactivity),
+2012_P05,,,2012,,
+2012_P06,Analytical chemistry,Titrations,2012,Analytical chemistry,Titrations
+2013_P01,Organic Chemistry (Reactivity),,2013,Organic Chemistry (Reactivity),
+2013_P02,"Inorganic Chemistry, Spectroscopy","Coordination chemistry including stereochemistry, Infrared",2013,"Inorganic Chemistry, Spectroscopy","Infrared, Coordination chemistry including stereochemistry"
+2013_P03,Polymers,Natural,2013,Polymers,Natural
+2013_P04,Physical chemistry,Thermodynamics,2013,Physical chemistry,Thermodynamics
+2013_P05,Physical chemistry (Equilibrium),Acid-base,2025,Physical chemistry (Equilibrium),Acid-base
+2013_P06,Physical chemistry,Electrochemistry,2025,Physical chemistry,Electrochemistry
